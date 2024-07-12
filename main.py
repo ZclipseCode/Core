@@ -1,12 +1,15 @@
 import pygame
+import background
 
 # pygame setup
 pygame.init()
-screen = pygame.display.set_mode((500, 500))
+screen = pygame.display.set_mode((640, 640))
 clock = pygame.time.Clock()
 running = True
 delta_time = 0
 keys = pygame.key.get_pressed()
+
+bg = background.Background(screen)
 
 while running:
     # poll for events
@@ -18,7 +21,10 @@ while running:
     keys = pygame.key.get_pressed()
 
     # fill the screen with a color to wipe away anything from last frame
+    # is this needed?
     screen.fill("grey")
+
+    bg.update()
 
     # flip() the display to put your work on screen
     pygame.display.flip()
