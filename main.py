@@ -1,5 +1,6 @@
 import pygame
 import background
+import grid
 
 # pygame setup
 pygame.init()
@@ -9,7 +10,8 @@ running = True
 delta_time = 0
 keys = pygame.key.get_pressed()
 
-bg = background.Background(screen)
+_background = background.Background(screen)
+_grid = grid.Grid(screen, 640, 640)
 
 while running:
     # poll for events
@@ -24,7 +26,8 @@ while running:
     # is this needed?
     screen.fill("grey")
 
-    bg.update()
+    _background.update()
+    _grid.update()
 
     # flip() the display to put your work on screen
     pygame.display.flip()

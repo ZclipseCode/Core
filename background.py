@@ -6,6 +6,7 @@ class Background:
         self.background_tile = pygame.image.load('Assets/Tetrominoes/Pattern01.png')
 
     def update(self):
+        # display background
         rows = 5
         columns = 5
         x = 0
