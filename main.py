@@ -24,7 +24,7 @@ while running:
 
     # fill the screen with a color to wipe away anything from last frame
     # is this needed?
-    screen.fill("grey")
+    screen.fill("gray")
 
     _background.update()
     _grid.update()
