@@ -1,6 +1,6 @@
 import pygame
 import tile
-import block
+import piece
 
 class Grid:
     def __init__(self, screen, x, y):
@@ -19,13 +19,8 @@ class Grid:
             tile_y += 16
     
     def update(self):
-        self.display_rect_tiles()
-        # self.click_tile_coordinates()
-        blocks = []
-        for i in range(10):
-            blocks.append(block.Block(self.screen, self.tiles[(i, 0)]))
-            blocks.append(block.Block(self.screen, self.tiles[(i, i)]))
-            blocks[i].update()
+        p = piece.Piece(self.screen, 't', self.tiles[(5, 5)])
+        p.update()
 
     def display_rect_tiles(self):
         tile_color_index = 0
