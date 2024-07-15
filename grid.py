@@ -1,6 +1,7 @@
 import pygame
 import tile
 import piece
+import random
 
 class Grid:
     def __init__(self, screen, x, y):
@@ -18,13 +19,23 @@ class Grid:
             tile_x = 0
             tile_y += 16
         
+        # pieces
+        self.pieces = []
+
         # core
-        self.core = piece.Piece(self.screen, 'core', self.tiles[(19, 19)])
-        self.core.selected = False
+        core = piece.Piece(self.screen, 'core', self.tiles[(19, 19)])
+        core.selected = False
+        self.pieces.append(core)
+
+        # first piece
+        shapes = ['o', 'i', 's', 'z', 'l', 'j', 't']
+        shape_index = random.randint(0, len(shapes) - 1)
+        current_piece = piece.Piece(self.screen, shapes[shape_index], self.tiles[(0, 0)])
+        self.pieces.append(current_piece)
     
-    def update(self, keys):
-        self.keys = keys
-        self.core.update(self.keys)
+    def update(self, events):
+        for p in self.pieces:
+            p.update(events)
 
     def display_rect_tiles(self):
         tile_color_index = 0
