@@ -23,14 +23,15 @@ class Grid:
         self.pieces = []
 
         # core
-        core = piece.Piece(self.screen, 'core', self.tiles[(19, 19)])
+        core = piece.Piece(self.screen, 'core', 'none', self.tiles[(19, 19)])
         core.selected = False
         self.pieces.append(core)
 
         # first piece
         shapes = ['o', 'i', 's', 'z', 'l', 'j', 't']
         shape_index = random.randint(0, len(shapes) - 1)
-        current_piece = piece.Piece(self.screen, shapes[shape_index], self.tiles[(0, 0)])
+        # current_piece = piece.Piece(self.screen, shapes[shape_index], 'south', self.tiles[(0, 0)])
+        current_piece = piece.Piece(self.screen, 'i', 'south', self.tiles[(10, 10)])
         self.pieces.append(current_piece)
     
     def update(self, events):

@@ -2,19 +2,19 @@ import block
 import pygame
 
 class Piece:
-    def __init__(self, screen, shape, tile):
+    def __init__(self, screen, shape, direction, tile):
         self.screen = screen
         self.shape = shape
+        self.direction = direction
         self.tile = tile
         self.selected = True
+        self.rotation = 0
         self.piece = None
-        self.movement()
+        self.assign_shape()
     
     def update(self, events):
         if self.selected:
             self.input(events)
-
-        self.movement()
 
         for block in self.piece:
             block.update()
@@ -22,16 +22,19 @@ class Piece:
     def input(self, events):
         for event in events:
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_UP:
-                    self.tile.set_xy(self.tile.x, self.tile.y - 16)
-                elif event.key == pygame.K_RIGHT:
-                    self.tile.set_xy(self.tile.x + 16, self.tile.y)
-                elif event.key == pygame.K_DOWN:
-                    self.tile.set_xy(self.tile.x, self.tile.y + 16)
-                elif event.key == pygame.K_LEFT:
-                    self.tile.set_xy(self.tile.x - 16, self.tile.y)
+                if self.direction == 'south':
+                    if event.key == pygame.K_UP:
+                        self.rotate('right', self.tile)
+                    elif event.key == pygame.K_RIGHT:
+                        for block in self.piece:
+                            block.tile.x += 16
+                    elif event.key == pygame.K_DOWN:
+                        self.rotate('left', self.tile)
+                    elif event.key == pygame.K_LEFT:
+                        for block in self.piece:
+                            block.tile.x -= 16
 
-    def movement(self):
+    def assign_shape(self):
         if self.shape == 'core':
             self.piece = self.core_shape(self.tile)
         elif self.shape == 'o':
@@ -112,3 +115,37 @@ class Piece:
         t.append(block.Block(self.screen, 'orange', pygame.math.Vector2(tile.x + 32, tile.y)))
         t.append(block.Block(self.screen, 'orange', pygame.math.Vector2(tile.x + 16, tile.y + 16)))
         return t
+    
+    def rotate(self, direction, tile):
+        if direction == 'left':
+            if self.rotation - 1 < 0:
+                self.rotation = 3
+            else:
+                self.rotation -= 1
+        elif direction == 'right':
+            if self.rotation + 1 > 3:
+                self.rotation = 0
+            else:
+                self.rotation += 1
+        
+        if self.shape == 'i':
+            if self.rotation == 0:
+                self.piece[0] = block.Block(self.screen, 'pink', tile)
+                self.piece[1] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x, tile.y + 16))
+                self.piece[2] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x, tile.y + 32))
+                self.piece[3] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x, tile.y + 48))
+            elif self.rotation == 1:
+                self.piece[0] = block.Block(self.screen, 'pink', tile)
+                self.piece[1] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x + 16, tile.y))
+                self.piece[2] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x + 32, tile.y))
+                self.piece[3] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x + 48, tile.y))
+            elif self.rotation == 2:
+                self.piece[0] = block.Block(self.screen, 'pink', tile)
+                self.piece[1] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x, tile.y - 16))
+                self.piece[2] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x, tile.y - 32))
+                self.piece[3] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x, tile.y - 48))
+            elif self.rotation == 3:
+                self.piece[0] = block.Block(self.screen, 'pink', tile)
+                self.piece[1] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x - 16, tile.y))
+                self.piece[2] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x - 32, tile.y))
+                self.piece[3] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x - 48, tile.y))
