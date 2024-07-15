@@ -10,3 +10,7 @@ class Tile:
     def display(self, color):
         # color can be a string (ex: "white")
         pygame.draw.rect(self.screen, color, (self.x, self.y, 16, 16))
+    
+    def set_xy(self, x, y):
+        self.x = x
+        self.y = y

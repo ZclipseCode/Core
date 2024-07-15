@@ -16,18 +16,19 @@ _grid = grid.Grid(screen, 640, 640)
 while running:
     # poll for events
     # pygame.QUIT event means the user clicked X to close your window
-    for event in pygame.event.get():
+    events = pygame.event.get()
+    for event in events:
         if event.type == pygame.QUIT:
             running = False
 
-    keys = pygame.key.get_pressed()
+    # keys = pygame.key.get_pressed()
 
     # fill the screen with a color to wipe away anything from last frame
     # is this needed?
     screen.fill("gray")
 
     _background.update()
-    _grid.update()
+    _grid.update(events)
 
     # flip() the display to put your work on screen
     pygame.display.flip()

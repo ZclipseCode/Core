@@ -4,25 +4,58 @@ import pygame
 class Piece:
     def __init__(self, screen, shape, tile):
         self.screen = screen
+        self.shape = shape
+        self.tile = tile
+        self.selected = True
         self.piece = None
-        if shape == 'o':
-            self.piece = self.o_shape(tile)
-        elif shape == 'i':
-            self.piece = self.i_shape(tile)
-        elif shape == 's':
-            self.piece = self.s_shape(tile)
-        elif shape == 'z':
-            self.piece = self.z_shape(tile)
-        elif shape == 'l':
-            self.piece = self.l_shape(tile)
-        elif shape == 'j':
-            self.piece = self.j_shape(tile)
-        elif shape == 't':
-            self.piece = self.t_shape(tile)
+        self.movement()
     
-    def update(self):
+    def update(self, events):
+        if self.selected:
+            self.input(events)
+
+        self.movement()
+
         for block in self.piece:
             block.update()
+    
+    def input(self, events):
+        for event in events:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_UP:
+                    self.tile.set_xy(self.tile.x, self.tile.y - 16)
+                elif event.key == pygame.K_RIGHT:
+                    self.tile.set_xy(self.tile.x + 16, self.tile.y)
+                elif event.key == pygame.K_DOWN:
+                    self.tile.set_xy(self.tile.x, self.tile.y + 16)
+                elif event.key == pygame.K_LEFT:
+                    self.tile.set_xy(self.tile.x - 16, self.tile.y)
+
+    def movement(self):
+        if self.shape == 'core':
+            self.piece = self.core_shape(self.tile)
+        elif self.shape == 'o':
+            self.piece = self.o_shape(self.tile)
+        elif self.shape == 'i':
+            self.piece = self.i_shape(self.tile)
+        elif self.shape == 's':
+            self.piece = self.s_shape(self.tile)
+        elif self.shape == 'z':
+            self.piece = self.z_shape(self.tile)
+        elif self.shape == 'l':
+            self.piece = self.l_shape(self.tile)
+        elif self.shape == 'j':
+            self.piece = self.j_shape(self.tile)
+        elif self.shape == 't':
+            self.piece = self.t_shape(self.tile)
+
+    def core_shape(self, tile):
+        core = []
+        core.append(block.Block(self.screen, 'core', tile))
+        core.append(block.Block(self.screen, 'core', pygame.math.Vector2(tile.x + 16, tile.y)))
+        core.append(block.Block(self.screen, 'core', pygame.math.Vector2(tile.x, tile.y + 16)))
+        core.append(block.Block(self.screen, 'core', pygame.math.Vector2(tile.x + 16, tile.y + 16)))
+        return core        
 
     def o_shape(self, tile):
         o = []

@@ -17,10 +17,14 @@ class Grid:
                 tile_x += 16
             tile_x = 0
             tile_y += 16
+        
+        # core
+        self.core = piece.Piece(self.screen, 'core', self.tiles[(19, 19)])
+        self.core.selected = False
     
-    def update(self):
-        p = piece.Piece(self.screen, 't', self.tiles[(5, 5)])
-        p.update()
+    def update(self, keys):
+        self.keys = keys
+        self.core.update(self.keys)
 
     def display_rect_tiles(self):
         tile_color_index = 0
