@@ -129,23 +129,45 @@ class Piece:
                 self.rotation += 1
         
         if self.shape == 'i':
-            if self.rotation == 0:
+            if self.rotation == 0 or self.rotation == 2:
                 self.piece[0] = block.Block(self.screen, 'pink', tile)
                 self.piece[1] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x, tile.y + 16))
                 self.piece[2] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x, tile.y + 32))
                 self.piece[3] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x, tile.y + 48))
-            elif self.rotation == 1:
+            elif self.rotation == 1 or self.rotation == 3:
                 self.piece[0] = block.Block(self.screen, 'pink', tile)
                 self.piece[1] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x + 16, tile.y))
                 self.piece[2] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x + 32, tile.y))
                 self.piece[3] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x + 48, tile.y))
-            elif self.rotation == 2:
-                self.piece[0] = block.Block(self.screen, 'pink', tile)
-                self.piece[1] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x, tile.y - 16))
-                self.piece[2] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x, tile.y - 32))
-                self.piece[3] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x, tile.y - 48))
-            elif self.rotation == 3:
-                self.piece[0] = block.Block(self.screen, 'pink', tile)
-                self.piece[1] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x - 16, tile.y))
-                self.piece[2] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x - 32, tile.y))
-                self.piece[3] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x - 48, tile.y))
+            # elif self.rotation == 2:
+            #     self.piece[0] = block.Block(self.screen, 'pink', tile)
+            #     self.piece[1] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x, tile.y - 16))
+            #     self.piece[2] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x, tile.y - 32))
+            #     self.piece[3] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x, tile.y - 48))
+            # elif self.rotation == 3:
+            #     self.piece[0] = block.Block(self.screen, 'pink', tile)
+            #     self.piece[1] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x - 16, tile.y))
+            #     self.piece[2] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x - 32, tile.y))
+            #     self.piece[3] = block.Block(self.screen, 'pink', pygame.math.Vector2(tile.x - 48, tile.y))
+        elif self.shape == 's':
+            if self.rotation == 0 or self.rotation == 2:
+                self.piece[0] = block.Block(self.screen, 'gray', tile)
+                self.piece[1] = block.Block(self.screen, 'gray', pygame.math.Vector2(tile.x + 16, tile.y))
+                self.piece[2] = block.Block(self.screen, 'gray', pygame.math.Vector2(tile.x + 16, tile.y - 16))
+                self.piece[3] = block.Block(self.screen, 'gray', pygame.math.Vector2(tile.x + 32, tile.y - 16))
+            elif self.rotation == 1 or self.rotation == 3:
+                self.piece[0] = block.Block(self.screen, 'gray', tile)
+                self.piece[1] = block.Block(self.screen, 'gray', pygame.math.Vector2(tile.x, tile.y + 16))
+                self.piece[2] = block.Block(self.screen, 'gray', pygame.math.Vector2(tile.x + 16, tile.y + 16))
+                self.piece[3] = block.Block(self.screen, 'gray', pygame.math.Vector2(tile.x + 16, tile.y + 32))
+        elif self.shape == 'z':
+            if self.rotation == 0 or self.rotation == 2:
+                self.piece[0] = block.Block(self.screen, 'purple', tile)
+                self.piece[1] = block.Block(self.screen, 'purple', pygame.math.Vector2(tile.x + 16, tile.y))
+                self.piece[2] = block.Block(self.screen, 'purple', pygame.math.Vector2(tile.x + 16, tile.y + 16))
+                self.piece[3] = block.Block(self.screen, 'purple', pygame.math.Vector2(tile.x + 32, tile.y + 16))
+            if self.rotation == 1 or self.rotation == 3:
+                self.piece[0] = block.Block(self.screen, 'purple', tile)
+                self.piece[1] = block.Block(self.screen, 'purple', pygame.math.Vector2(tile.x, tile.y + 16))
+                self.piece[2] = block.Block(self.screen, 'purple', pygame.math.Vector2(tile.x - 16, tile.y + 16))
+                self.piece[3] = block.Block(self.screen, 'purple', pygame.math.Vector2(tile.x - 16, tile.y + 32))

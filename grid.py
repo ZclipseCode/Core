@@ -31,7 +31,7 @@ class Grid:
         shapes = ['o', 'i', 's', 'z', 'l', 'j', 't']
         shape_index = random.randint(0, len(shapes) - 1)
         # current_piece = piece.Piece(self.screen, shapes[shape_index], 'south', self.tiles[(0, 0)])
-        current_piece = piece.Piece(self.screen, 'i', 'south', self.tiles[(10, 10)])
+        current_piece = piece.Piece(self.screen, 'z', 'south', self.tiles[(10, 10)])
         self.pieces.append(current_piece)
     
     def update(self, events):
